@@ -1,0 +1,24 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": ["@typescript-eslint", "react"],
+    "rules": {
+        "@typescript-eslint/no-explicit-any": "warn",
+        "newline-before-return": "warn",
+        "semi": "warn",
+        "jsx-quotes": ["warn", "prefer-double"],
+        "quotes": ["warn", "single"],
+        "react/jsx-key": "warn",
+        "@typescript-eslint/no-var-requires": "off"
+    },
+    "ignorePatterns": ["src/**/*.test.ts"]
+}

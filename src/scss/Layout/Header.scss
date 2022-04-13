@@ -1,0 +1,38 @@
+@import '../variables/';
+
+$profile-size: 40px;
+$cart-size: 30px;
+
+.header {
+    height: 50px;
+    box-shadow: 0 0 5px rgba($black, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    justify-content: flex-end;
+}
+
+.profile {
+    width: $profile-size;
+    height: $profile-size;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.cartIcon {
+    &.MuiSvgIcon-root {
+        width: $cart-size;
+        height: $cart-size;
+    }
+}
+
+.auth-options {
+    display: flex;
+
+    .MuiAvatar-root {
+        transition: opacity 0.2s linear;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}

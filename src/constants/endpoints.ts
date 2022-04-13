@@ -1,0 +1,17 @@
+export enum Endpoints {
+    USER_REGISTRATION = '/user/registration',
+    USER_LOGIN = '/user/login',
+    USER_DATA = '/user/user',
+    USER_REFRESH_TOKEN = '/user/refresh',
+    USER_VERIFICATION = '/user/verification',
+    USER_GMAIL_AUTH = '/user/gmailAuth',
+    USER_GMAIL_AUTH_CALLBACK = '/user/gmailAuthCallback',
+    USER_ADD_CART = '/user/addCart',
+    USER_REMOVE_CART = '/user/removeCart',
+    USER_PURCHASE = '/user/purchase',
+    PRODUCT_ADD = '/product/add',
+    PRODUCT_REMOVE = '/product/remove',
+    PRODUCT_CATEGORIES = '/product/categories',
+    PRODUCT_PRODUCT = '/product/product',
+    PRODUCT_CATEGORY = '/product/category',
+}
