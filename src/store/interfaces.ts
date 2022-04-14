@@ -26,3 +26,7 @@ export interface IProduct {
     briefInformation: string;
     category: string;
 }
+
+export interface INavigation {
+    navItems: string[];
+}

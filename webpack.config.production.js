@@ -20,11 +20,6 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            sourceMap: true,
-                            importLoaders: 1,
-                        },
                     },
                     {
                         loader: 'postcss-loader',

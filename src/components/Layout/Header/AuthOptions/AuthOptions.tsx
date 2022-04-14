@@ -2,13 +2,16 @@ import { Logout, Person } from '@mui/icons-material';
 import { Avatar, Menu, MenuItem } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { removeTokens } from '../../../helpers/tokensHelpers';
-import { User } from '../../../store';
+import { removeTokens } from '../../../../helpers/tokensHelpers';
+import { User } from '../../../../store';
+import { CartButton } from '../../../Common/CartButton';
 
 export const AuthOptions = observer(() => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const handleOpenUserMenu = (event) => {
+    const handleOpenUserMenu: React.MouseEventHandler<HTMLDivElement> = (
+        event
+    ) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -25,6 +28,8 @@ export const AuthOptions = observer(() => {
 
     return (
         <div className="auth-options">
+            <CartButton />
+
             <Avatar
                 style={{
                     cursor: 'pointer',
