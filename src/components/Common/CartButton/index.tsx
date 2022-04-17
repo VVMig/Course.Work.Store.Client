@@ -6,8 +6,16 @@ import { Link } from 'react-router-dom';
 import { URL } from '../../../constants/URL';
 import { User } from '../../../store';
 
-export const CartButton = observer(() => {
-    return (
+interface IProps {
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export const CartButton = observer(({ onClick }: IProps) => {
+    return onClick ? (
+        <IconButton onClick={onClick}>
+            <LocalMall />
+        </IconButton>
+    ) : (
         <Link to={URL.CART} className="cart">
             <IconButton>
                 <Badge badgeContent={User.cart.length ?? 0} color="primary">

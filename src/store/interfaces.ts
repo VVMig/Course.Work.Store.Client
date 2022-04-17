@@ -17,13 +17,14 @@ export interface IProductImage {
 
 export interface IProduct {
     id: string;
+    _id?: string;
     title: string;
     description: string;
     price: number;
     images: IProductImage[];
     amount: number;
-    commonId: string;
-    briefInformation: string;
+    commonId?: string;
+    briefInformation?: string;
     category: string;
 }
 

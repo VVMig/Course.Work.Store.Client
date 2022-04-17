@@ -13,6 +13,13 @@ export interface IAuthSignUpArgs extends IAuthSignInArgs {
 export interface IAuthResponse {
     accessToken: string;
     refreshToken: string;
-
     user: IUser;
+}
+
+export interface IAddProductBody {
+    title: string;
+    description: string;
+    briefInformation: string;
+    price: number;
+    category: string;
 }

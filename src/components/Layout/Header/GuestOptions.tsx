@@ -1,28 +1,15 @@
 import { Button } from '@mui/material';
-import React, { useCallback, useState } from 'react';
-import { SignInDialog } from '../../Common/SignInDialog';
-import { SignUpDialog } from '../../Common/SignUpDialog';
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import Dialogs from '../../../store/Dialogs';
 
-export const GuestOptions = () => {
-    const [isSignInOpen, setIsSignInOpen] = useState(false);
-    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-
-    const toggleSignIn = useCallback(() => {
-        setIsSignInOpen((prev) => !prev);
-    }, []);
-
-    const toggleSignUp = useCallback(() => {
-        setIsSignUpOpen((prev) => !prev);
-    }, []);
-
+export const GuestOptions = observer(() => {
     return (
         <>
             <div>
-                <Button onClick={toggleSignIn}>Sign in</Button>
-                <Button onClick={toggleSignUp}>Sign up</Button>
+                <Button onClick={Dialogs.toggleLoginDialog}>Sign in</Button>
+                <Button onClick={Dialogs.toggleRegisterDialog}>Sign up</Button>
             </div>
-            <SignInDialog isOpen={isSignInOpen} handleClose={toggleSignIn} />
-            <SignUpDialog isOpen={isSignUpOpen} handleClose={toggleSignUp} />
         </>
     );
-};
+});

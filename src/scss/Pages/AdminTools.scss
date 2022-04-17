@@ -1,0 +1,43 @@
+.admin-tools {
+    margin-top: 20px;
+    padding: 10px 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+
+    &__list {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    &__add-product {
+        cursor: pointer;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h3 {
+            font-size: 24px;
+            color: $blue;
+        }
+
+        &:hover {
+            box-shadow: 0 0 5px $blue;
+        }
+
+        .MuiSvgIcon-root {
+            width: 100px;
+            height: 100px;
+            fill: $blue;
+        }
+    }
+}

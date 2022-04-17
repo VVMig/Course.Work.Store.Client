@@ -3,4 +3,6 @@ export enum URL {
     CART = '/cart',
     SING_UP = '/sign-up',
     CATEGORY = '/category',
+    PROFILE = '/profile',
+    PRODUCT = '/product',
 }

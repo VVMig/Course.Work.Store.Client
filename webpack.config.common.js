@@ -27,6 +27,7 @@ module.exports = (env) => ({
     plugins: [
         new HtmlWebpackPlugin({
             template: 'public/index.html',
+            publicPath: '/',
         }),
         new webpack.DefinePlugin({
             BASE_URL: JSON.stringify(

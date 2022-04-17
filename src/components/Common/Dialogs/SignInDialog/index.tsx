@@ -4,14 +4,13 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
-import { UserErrorMessages } from '../../../constants/ErrorMessages';
-import { requestErrorMessage } from '../../../helpers/errorResponse';
-import { saveTokens } from '../../../helpers/tokensHelpers';
-import '../../../scss/Common/index.scss';
-import { signIn } from '../../../services/authApiService';
-import { User } from '../../../store';
-import { CustomInput } from '../CustomInput';
-import { GoogleButton } from '../GoogleButton';
+import { UserErrorMessages } from '../../../../constants/ErrorMessages';
+import { requestErrorMessage } from '../../../../helpers/errorResponse';
+import { saveTokens } from '../../../../helpers/tokensHelpers';
+import { signIn } from '../../../../services/authApiService';
+import { User } from '../../../../store';
+import { CustomInput } from '../../CustomInput';
+import { GoogleButton } from '../../GoogleButton';
 
 interface IProps {
     isOpen: boolean;

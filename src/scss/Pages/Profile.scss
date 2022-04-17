@@ -1,0 +1,33 @@
+$iconSize: 100px;
+
+.profile-page {
+    height: 100%;
+
+    &__icon {
+        .MuiSvgIcon-root {
+            width: $iconSize;
+            height: $iconSize;
+            fill: $grey;
+        }
+    }
+
+    &__content {
+        height: 100%;
+    }
+
+    &__main-info {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__welcome {
+        display: flex;
+        height: 100%;
+        font-size: 36px;
+
+        &-name {
+            color: $blue;
+        }
+    }
+}

@@ -86,6 +86,13 @@ $cart-size: 30px;
             opacity: 0.7;
         }
     }
+
+    &__menu-link {
+        text-decoration: none;
+        color: $black;
+        display: flex;
+        align-items: flex-end;
+    }
 }
 
 .main-logo {

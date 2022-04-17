@@ -33,6 +33,14 @@ class User implements IUser {
         this.lastName = undefined;
         this.cart = [];
     };
+
+    updateCart = (items: IProduct[]) => {
+        this.cart = items.slice();
+    };
+
+    getFullName = () => `${this.firstName} ${this.lastName}`;
+
+    isItemInCart = (id) => this.cart.some((item) => item._id === id);
 }
 
 export default new User();

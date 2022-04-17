@@ -2,6 +2,8 @@ import { Logout, Person } from '@mui/icons-material';
 import { Avatar, Menu, MenuItem } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { URL } from '../../../../constants/URL';
 import { removeTokens } from '../../../../helpers/tokensHelpers';
 import { User } from '../../../../store';
 import { CartButton } from '../../../Common/CartButton';
@@ -58,8 +60,10 @@ export const AuthOptions = observer(() => {
                 onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={handleCloseUserMenu}>
-                    <Person />
-                    Profile
+                    <Link to={URL.PROFILE} className="auth-options__menu-link">
+                        <Person />
+                        Profile
+                    </Link>
                 </MenuItem>
                 <MenuItem onClick={onClickLogout}>
                     <Logout />

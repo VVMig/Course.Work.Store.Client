@@ -11,6 +11,11 @@ class Bootstrap implements INavigation {
     setNavItem = (navItems: string[]) => {
         this.navItems = navItems.slice();
     };
+
+    findProperCatefory = (findCategory: string) =>
+        this.navItems.find(
+            (category) => category.toLowerCase() === findCategory.toLowerCase()
+        );
 }
 
 export default new Bootstrap();
