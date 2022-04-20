@@ -54,7 +54,7 @@ export const SignUpDialog = ({ isOpen, handleClose }: IProps) => {
                     lastName,
                 });
 
-                toast.success('check the activation email in your mail');
+                toast.success('Check the activation link in your mail');
 
                 saveTokens(data.accessToken, data.refreshToken);
                 User.loginUser(data.user);
@@ -68,7 +68,6 @@ export const SignUpDialog = ({ isOpen, handleClose }: IProps) => {
                         'email',
                         UserErrorMessages.EMAIL_EXIST
                     );
-                    console.log('here');
                 }
 
                 toast.error(errorMessage);

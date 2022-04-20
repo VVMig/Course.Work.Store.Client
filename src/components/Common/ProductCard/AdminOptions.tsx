@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { requestErrorMessage } from '../../../helpers/errorResponse';
 import { getAccessToken } from '../../../helpers/tokensHelpers';
 import { removeProduct } from '../../../services/productApiService';
-import Dialogs from '../../../store/Dialogs';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog';
 
 interface IProps {
@@ -27,11 +26,12 @@ export const AdminOptions = observer(
         updateProductsList,
     }: IProps) => {
         const [isLoading, setIsLoading] = useState(false);
+        const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
         const toggleConfirmationDialog = (e?: React.MouseEvent) => {
             e?.preventDefault();
 
-            Dialogs.toggleConfirmDialog();
+            setIsConfirmDialogOpen((prev) => !prev);
             handleClose();
         };
 
@@ -80,7 +80,7 @@ export const AdminOptions = observer(
                 </Menu>
                 <ConfirmDialog
                     onPositiveChoice={onClickRemove}
-                    isOpen={Dialogs.confirmDialog}
+                    isOpen={isConfirmDialogOpen}
                     handleClose={toggleConfirmationDialog}
                     title={`Remove ${productTitle}?`}
                 />

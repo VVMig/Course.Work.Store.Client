@@ -1,0 +1,33 @@
+$height: 80px;
+
+.image-preview {
+    width: max-content;
+    height: max-content;
+    position: relative;
+    border: 1px solid $blue;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        height: $height;
+        object-fit: cover;
+    }
+
+    .MuiButtonBase-root {
+        position: absolute;
+        right: 0;
+        top: 0;
+        fill: $blue;
+        width: 30px;
+        height: 30px;
+    }
+
+    &__list {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}

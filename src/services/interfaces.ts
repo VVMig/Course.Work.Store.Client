@@ -22,4 +22,14 @@ export interface IAddProductBody {
     briefInformation: string;
     price: number;
     category: string;
+    images: string[];
+}
+
+export interface IPurchaseBody {
+    amount?: number;
+    address?: string;
+    commentary?: string;
+    tel?: string;
+    paymentMethod?: string;
+    ids: string[];
 }

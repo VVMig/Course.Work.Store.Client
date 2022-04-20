@@ -1,0 +1,33 @@
+.home-page {
+    overflow: hidden;
+    &__slider {
+        .swiper-slide-shadow {
+            background: transparent !important;
+        }
+
+        &__content {
+            height: 400px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &__products {
+        padding-top: 20px;
+
+        &__title {
+            font-size: 24px;
+            color: $black;
+            text-transform: capitalize;
+            font-weight: 100;
+        }
+
+        &__list {
+            padding-top: 20px;
+            display: grid;
+            justify-items: center;
+            row-gap: 15px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

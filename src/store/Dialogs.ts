@@ -4,7 +4,6 @@ class Dialogs {
     loginDialog = false;
     registerDialog = false;
     addProductDialog = false;
-    confirmDialog = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -20,11 +19,6 @@ class Dialogs {
 
     toggleAddProductDialog = () => {
         this.addProductDialog = !this.addProductDialog;
-    };
-
-    toggleConfirmDialog = () => {
-        console.log('1');
-        this.confirmDialog = !this.confirmDialog;
     };
 }
 

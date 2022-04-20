@@ -1,0 +1,12 @@
+.users-page {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+
+    &__actions {
+        padding: 10px 0;
+        display: flex;
+        gap: 10px;
+    }
+}

@@ -5,4 +5,8 @@ export enum URL {
     CATEGORY = '/category',
     PROFILE = '/profile',
     PRODUCT = '/product',
+    PURCHASE = '/purchase',
+    VERIFICATION_SUCCESS = '/verification/success',
+    SEARCH = '/search',
+    USERS = '/admin/users',
 }

@@ -16,12 +16,16 @@ import { requestErrorMessage } from '../../../../helpers/errorResponse';
 import { getAccessToken } from '../../../../helpers/tokensHelpers';
 import { addProduct } from '../../../../services/productApiService';
 import { Bootstrap } from '../../../../store';
+import { CustomFileUploader } from '../../CustomFileUploader';
 import { CustomInput } from '../../CustomInput';
+import { ImagePreview } from '../../ImagePreview';
 
 interface IProps {
     isOpen: boolean;
     handleClose?: () => void;
 }
+
+const fileTypes = ['JPG', 'PNG', 'GIF', 'JPEG'];
 
 const validationSchema = yup.object().shape({
     title: yup.string().required('Required'),
@@ -44,14 +48,16 @@ type FormValues = typeof initialValues;
 export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [category, setCategory] = useState('');
+    const [images, setImages] = useState<string[]>();
 
     const addProductRequest = async (values: FormValues) => {
         try {
             setIsLoading(true);
 
-            addProduct(
+            await addProduct(
                 {
                     ...values,
+                    images,
                     category,
                 },
                 getAccessToken()
@@ -70,13 +76,32 @@ export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
         values: FormValues,
         actions: FormikHelpers<FormValues>
     ) => {
-        console.log(values);
         addProductRequest(values);
         actions.setSubmitting(false);
     };
 
     const onChangeCategory = (event: SelectChangeEvent) => {
         setCategory(event.target.value);
+    };
+
+    const onRemoveImage = (imageIndex: number) => () => {
+        setImages((prev) => prev.filter((_, index) => index !== imageIndex));
+    };
+
+    const handleChangeFile = async (uploadedImages: Blob[]) => {
+        const promisedImages = Array.from(uploadedImages).map((file) => {
+            const reader = new FileReader();
+
+            return new Promise<ArrayBuffer | string>((resolve) => {
+                reader.onload = () => resolve(reader.result);
+
+                reader.readAsDataURL(file);
+            });
+        });
+
+        const renderedImages = await Promise.all(promisedImages);
+
+        setImages(renderedImages as string[]);
     };
 
     return (
@@ -125,6 +150,25 @@ export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
                                 variant="outlined"
                                 label="Amount"
                             />
+                            <CustomFileUploader
+                                handleChange={handleChangeFile}
+                                name="images"
+                                fileTypes={fileTypes}
+                            />
+                            {!!images?.length && (
+                                <div className="image-preview__list">
+                                    {images.map((image, imageIndex) => (
+                                        <ImagePreview
+                                            key={`${imageIndex}-image`}
+                                            src={image}
+                                            onClickClose={onRemoveImage(
+                                                imageIndex
+                                            )}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+
                             <InputLabel id="demo-simple-select-label">
                                 Category
                             </InputLabel>

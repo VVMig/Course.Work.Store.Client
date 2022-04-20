@@ -31,3 +31,21 @@ export const removeProduct = (id: string, accessToken: string) => {
         }
     );
 };
+
+export const getProduct = (id: string) => {
+    return axios.get<{ product: IProduct }>(
+        `${getEndpointUrl(Endpoints.PRODUCT_PRODUCT)}?id=${id}`
+    );
+};
+
+export const searchProducts = (text: string) => {
+    return axios.get<IProduct[]>(
+        `${getEndpointUrl(Endpoints.PRODUCT_SEARCH)}?text=${text}`
+    );
+};
+
+export const getNewProducts = (limit: number) => {
+    return axios.get<IProduct[]>(
+        `${getEndpointUrl(Endpoints.PRODUCT_NEW)}?limit=${limit}`
+    );
+};

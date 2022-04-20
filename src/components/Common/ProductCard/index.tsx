@@ -1,20 +1,13 @@
-import { MoreVert } from '@mui/icons-material';
+import { Delete, MoreVert } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Roles } from '../../../constants/Roles';
 import { URL } from '../../../constants/URL';
-import { requestErrorMessage } from '../../../helpers/errorResponse';
-import { getAccessToken } from '../../../helpers/tokensHelpers';
-import {
-    addProductToCart,
-    removeProductFromCart,
-} from '../../../services/userApiService';
+import { useToggleCart } from '../../../hooks/useToggleCart';
 import { User } from '../../../store';
-import Dialogs from '../../../store/Dialogs';
 import { CartButton } from '../CartButton';
 import { AdminOptions } from './AdminOptions';
 
@@ -23,14 +16,28 @@ interface IProps {
     price: number;
     category: string;
     id: string;
-    updateProductsList: () => Promise<void>;
+    briefInformation: string;
+    isCart?: boolean;
+    imageSrc?: string;
+    updateProductsList?: () => Promise<void>;
 }
 
 export const ProductCard = observer(
-    ({ title, price, id, category, updateProductsList }: IProps) => {
+    ({
+        title,
+        price,
+        id,
+        category,
+        updateProductsList,
+        briefInformation,
+        isCart,
+        imageSrc,
+    }: IProps) => {
         const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(
             null
         );
+
+        const handleAddToCart = useToggleCart(id, title);
 
         const handleClick = useCallback(
             (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,47 +58,6 @@ export const ProductCard = observer(
         const isInCart = useMemo(() => User.isItemInCart(id), [User.cart]);
         const isAdmin = useMemo(() => User.role === Roles.ADMIN, [User.role]);
 
-        const onClickAddToCart: React.MouseEventHandler<
-            HTMLButtonElement
-        > = async (e) => {
-            e.preventDefault();
-
-            if (!User.isAuth()) {
-                Dialogs.toggleLoginDialog();
-
-                toast.info('You need to sign in first');
-
-                return;
-            }
-
-            if (isInCart) {
-                try {
-                    const { data } = await removeProductFromCart(
-                        id,
-                        getAccessToken()
-                    );
-
-                    User.updateCart(data.cart);
-
-                    toast.success(`${title} has been removed from the cart`);
-                } catch (error) {
-                    toast.error(requestErrorMessage(error));
-                }
-
-                return;
-            }
-
-            try {
-                const { data } = await addProductToCart(id, getAccessToken());
-
-                User.updateCart(data.cart);
-
-                toast.success(`${title} has been added to the cart`);
-            } catch (error) {
-                toast.error(requestErrorMessage(error));
-            }
-        };
-
         return (
             <div className="product-card">
                 <Link
@@ -100,7 +66,7 @@ export const ProductCard = observer(
                     }?id=${id}&type=${category.toLowerCase()}`}
                 >
                     <div className="product-card__container">
-                        {isAdmin && (
+                        {isAdmin && !isCart && (
                             <>
                                 <IconButton
                                     className="product-card__admin-options"
@@ -118,13 +84,16 @@ export const ProductCard = observer(
                                 />
                             </>
                         )}
-                        <div className="product-card__image">
-                            <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1644969385433" />
-                        </div>
+                        <div
+                            className="product-card__image"
+                            style={{
+                                backgroundImage: `url(${imageSrc})`,
+                            }}
+                        />
                         <div className="product-card__info">
                             <h3 className="product-card__title">{title}</h3>
                             <h4 className="product-card__manufacturer">
-                                Apple
+                                {briefInformation}
                             </h4>
                             <div
                                 className={clsx('product-card__info__footer', {
@@ -134,7 +103,13 @@ export const ProductCard = observer(
                                 <div className="product-card__info__footer__price">
                                     {price}$
                                 </div>
-                                <CartButton onClick={onClickAddToCart} />
+                                {isCart ? (
+                                    <IconButton onClick={handleAddToCart}>
+                                        <Delete />
+                                    </IconButton>
+                                ) : (
+                                    <CartButton onClick={handleAddToCart} />
+                                )}
                             </div>
                         </div>
                     </div>

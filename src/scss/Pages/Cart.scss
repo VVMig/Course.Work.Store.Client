@@ -1,0 +1,35 @@
+.cart-page {
+    width: 100%;
+
+    &__products-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 15px;
+        justify-items: center;
+    }
+
+    &__empty {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+
+        .MuiButton-root {
+            width: 200px;
+            height: 50px;
+            font-size: 18px;
+            background-color: $green;
+            color: $white;
+
+            &:hover {
+                background-color: rgba($green, 0.5);
+            }
+        }
+    }
+}

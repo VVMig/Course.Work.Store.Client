@@ -12,8 +12,6 @@ interface IProps {
 
 export const AuthRoute: React.FC<IProps> = observer(
     ({ children, isLoading }): React.ReactElement | null => {
-        console.log(!User.isAuth());
-
         if (!User.isAuth() && !isLoading) {
             toast.info('Please sign up');
 

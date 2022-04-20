@@ -9,11 +9,18 @@ import { auth } from '../../services/authApiService';
 import { User } from '../../store';
 import { AuthRoute } from '../Common/AuthRoute';
 import { GlobalDialogs } from '../Common/Dialogs';
+import { Footer } from '../Layout/Footer';
 import { Header } from '../Layout/Header/Header';
+import { Cart } from '../Pages/Cart';
 import { Category } from '../Pages/Category';
 import { Home } from '../Pages/Home';
+import { NotFound } from '../Pages/NotFound';
 import { Product } from '../Pages/Product';
 import { Profile } from '../Pages/Profile';
+import { Purchase } from '../Pages/Purchase';
+import { SearchPage } from '../Pages/Search';
+import { Users } from '../Pages/Users';
+import { VerificationSuccess } from '../Pages/VerificationSuccess';
 
 export const ConnectedRender = observer(() => {
     const [isLoading, setIsLoading] = useState(true);
@@ -55,16 +62,38 @@ export const ConnectedRender = observer(() => {
                                 <Profile />
                             </AuthRoute>
                         }
-                    ></Route>
-
+                    />
                     <Route
                         path={`${URL.CATEGORY}${URL.PRODUCT}`}
                         element={<Product />}
                     />
                     <Route path={URL.CATEGORY} element={<Category />} />
-                    <Route path="*" element={<>Not found</>} />
+                    <Route
+                        path={URL.PURCHASE}
+                        element={
+                            <AuthRoute isLoading={isLoading}>
+                                <Purchase />
+                            </AuthRoute>
+                        }
+                    />
+                    <Route
+                        path={URL.CART}
+                        element={
+                            <AuthRoute isLoading={isLoading}>
+                                <Cart />
+                            </AuthRoute>
+                        }
+                    />
+                    <Route
+                        path={URL.VERIFICATION_SUCCESS}
+                        element={<VerificationSuccess />}
+                    />
+                    <Route path={URL.SEARCH} element={<SearchPage />} />
+                    <Route path={URL.USERS} element={<Users />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
+            <Footer />
             <GlobalDialogs />
         </>
     );
