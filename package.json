@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "start:dev": "webpack-dev-server --mode development --env env=development --env BASE_URL=http://localhost:3000/api",
-        "build": "webpack --mode production --env env=production --env BASE_URL=http://localhost:3000/api"
+        "build": "webpack --mode production --env env=production --env BASE_URL=https://vvmig-server-bsu.herokuapp.com/api",
+        "start:dev:pub": "webpack-dev-server --mode development --env env=development --env BASE_URL=https://vvmig-server-bsu.herokuapp.com/api"
     },
     "repository": {
         "type": "git",
