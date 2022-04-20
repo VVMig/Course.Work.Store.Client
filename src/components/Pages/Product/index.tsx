@@ -15,6 +15,7 @@ import { useQuery } from '../../../hooks/useQueryParams';
 import { useToggleCart } from '../../../hooks/useToggleCart';
 import { getProduct } from '../../../services/productApiService';
 import { User } from '../../../store';
+import Dialogs from '../../../store/Dialogs';
 import { IProduct } from '../../../store/interfaces';
 import PurchaseProduct from '../../../store/PurchaseProduct';
 import { CartButton } from '../../Common/CartButton';
@@ -38,6 +39,12 @@ export const Product = observer(() => {
     };
 
     const onClickBuy = () => {
+        if (!User.isAuth()) {
+            Dialogs.toggleLoginDialog();
+
+            return;
+        }
+
         PurchaseProduct.setPurchaseProduct([product]);
 
         navigate(URL.PURCHASE);

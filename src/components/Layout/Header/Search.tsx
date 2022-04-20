@@ -1,5 +1,5 @@
 import { Search as SearchIcon } from '@mui/icons-material';
-import { IconButton, MenuItem } from '@mui/material';
+import { ClickAwayListener, IconButton, MenuItem } from '@mui/material';
 import clsx from 'clsx';
 import _debounce from 'lodash/debounce';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -67,41 +67,43 @@ export const Search = () => {
 
     return (
         <div className="header__search">
-            <form
-                className="header__search__form"
-                autoComplete="off"
-                onSubmit={onSubmitSearch}
-            >
-                <input
-                    type="text"
-                    className={clsx('header__search__input', {
-                        ['header__search__input_hints']:
-                            !!previewProducts.length,
-                    })}
-                    placeholder="Search"
-                    name="searchText"
-                    onChange={onChangeSearchText}
-                    value={searchText}
-                />
-                <IconButton type="submit">
-                    <SearchIcon />
-                </IconButton>
-                {!!previewProducts.length && (
-                    <div className="header__search__hints">
-                        {previewProducts.map((product) => (
-                            <Link
-                                key={product.id ?? product._id}
-                                to={`${URL.CATEGORY}${URL.PRODUCT}?id=${
-                                    product.id ?? product._id
-                                }&type=${product.category.toLowerCase()}`}
-                                onClick={resetForm}
-                            >
-                                <MenuItem>{product.title}</MenuItem>
-                            </Link>
-                        ))}
-                    </div>
-                )}
-            </form>
+            <ClickAwayListener onClickAway={() => setPreviewProducts([])}>
+                <form
+                    className="header__search__form"
+                    autoComplete="off"
+                    onSubmit={onSubmitSearch}
+                >
+                    <input
+                        type="text"
+                        className={clsx('header__search__input', {
+                            ['header__search__input_hints']:
+                                !!previewProducts.length,
+                        })}
+                        placeholder="Search"
+                        name="searchText"
+                        onChange={onChangeSearchText}
+                        value={searchText}
+                    />
+                    <IconButton type="submit">
+                        <SearchIcon />
+                    </IconButton>
+                    {!!previewProducts.length && (
+                        <div className="header__search__hints">
+                            {previewProducts.map((product) => (
+                                <Link
+                                    key={product.id ?? product._id}
+                                    to={`${URL.CATEGORY}${URL.PRODUCT}?id=${
+                                        product.id ?? product._id
+                                    }&type=${product.category.toLowerCase()}`}
+                                    onClick={resetForm}
+                                >
+                                    <MenuItem>{product.title}</MenuItem>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </form>
+            </ClickAwayListener>
         </div>
     );
 };

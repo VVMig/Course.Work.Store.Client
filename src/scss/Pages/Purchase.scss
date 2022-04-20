@@ -19,6 +19,10 @@
 
     &__stepper {
         width: 50%;
+
+        @media screen and (max-width: $mdAndBelow) {
+            width: 90%;
+        }
     }
 
     &__amount {
@@ -33,6 +37,10 @@
     &__information {
         .MuiFormControl-root {
             width: 70%;
+
+            @media screen and (max-width: $mdAndBelow) {
+                width: 100%;
+            }
         }
 
         .MuiToggleButtonGroup-root {

@@ -15,8 +15,8 @@ export const Header = observer(() => {
                 <MainLogo />
                 <Navigation />
             </div>
-            <Search />
             <div className="header__right">
+                <Search />
                 {User.isAuth() ? <AuthOptions /> : <GuestOptions />}
             </div>
         </header>

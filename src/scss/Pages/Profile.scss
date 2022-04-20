@@ -3,6 +3,10 @@ $iconSize: 100px;
 .profile-page {
     height: 100%;
 
+    @media screen and (max-width: $xlAndBelow) {
+        margin: 0 5px;
+    }
+
     &__icon {
         .MuiSvgIcon-root {
             width: $iconSize;

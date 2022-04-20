@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { URL } from '../../constants/URL';
 import { requestErrorMessage } from '../../helpers/errorResponse';
-import { getAccessToken } from '../../helpers/tokensHelpers';
+import { getAccessToken, removeTokens } from '../../helpers/tokensHelpers';
 import { auth } from '../../services/authApiService';
 import { User } from '../../store';
 import { AuthRoute } from '../Common/AuthRoute';
@@ -40,6 +40,8 @@ export const ConnectedRender = observer(() => {
             User.loginUser(data);
         } catch (error) {
             toast.error(requestErrorMessage(error));
+
+            removeTokens();
         }
 
         setIsLoading(false);

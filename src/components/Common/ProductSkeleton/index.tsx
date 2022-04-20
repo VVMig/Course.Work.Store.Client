@@ -16,8 +16,8 @@ export const ProductSkeleton = ({ itemsAmount = 8 }: IProps) => {
             ).map((_, index) => (
                 <Skeleton
                     key={index}
-                    width={300}
-                    height={400}
+                    width={270}
+                    height={370}
                     style={{
                         borderRadius: 15,
                     }}

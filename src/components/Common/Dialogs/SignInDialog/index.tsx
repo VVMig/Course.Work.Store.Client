@@ -73,7 +73,11 @@ export const SignInDialog = ({ isOpen, handleClose }: IProps) => {
     };
 
     return (
-        <Dialog open={isOpen} onBackdropClick={handleClose}>
+        <Dialog
+            open={isOpen}
+            onBackdropClick={handleClose}
+            className="global-dialog"
+        >
             <DialogTitle>Sign In</DialogTitle>
             <Formik
                 initialValues={initialValues}

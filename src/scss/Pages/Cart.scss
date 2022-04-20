@@ -6,6 +6,18 @@
         grid-template-columns: repeat(4, 1fr);
         row-gap: 15px;
         justify-items: center;
+
+        @media screen and (max-width: $xlAndBelow) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media screen and (max-width: $lgAndBelow) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media screen and (max-width: $smAndBelow) {
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
 
     &__empty {
@@ -29,6 +41,14 @@
 
             &:hover {
                 background-color: rgba($green, 0.5);
+            }
+        }
+
+        @media screen and (max-width: $lgAndBelow) {
+            justify-content: center;
+
+            .MuiButton-root {
+                width: 90%;
             }
         }
     }

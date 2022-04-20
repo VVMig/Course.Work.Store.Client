@@ -1,10 +1,18 @@
 .product-page {
+    @media screen and (max-width: $xlAndBelow) {
+        padding: 0 10px;
+    }
+
     &__slider {
         &__slide {
             &__content {
                 height: 400px;
                 display: flex;
                 justify-content: center;
+
+                @media screen and (max-width: $smAndBelow) {
+                    height: 200px;
+                }
             }
         }
     }
@@ -51,6 +59,10 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+
+        @media screen and (max-width: $smAndBelow) {
+            justify-content: center;
+        }
 
         .MuiButton-root {
             width: 300px;

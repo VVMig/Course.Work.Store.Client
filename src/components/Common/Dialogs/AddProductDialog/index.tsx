@@ -105,7 +105,11 @@ export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
     };
 
     return (
-        <Dialog open={isOpen} onBackdropClick={handleClose}>
+        <Dialog
+            open={isOpen}
+            onBackdropClick={handleClose}
+            className="global-dialog"
+        >
             <DialogTitle>Add product</DialogTitle>
             <Formik
                 initialValues={initialValues}

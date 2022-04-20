@@ -1,5 +1,20 @@
 @import '../variables/index.scss';
 
+.global-dialog {
+    @media screen and (max-width: $smAndBelow) {
+        .MuiPaper-root {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 0;
+            height: 80%;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+    }
+}
+
 .sign-in-form {
     width: 100%;
 
@@ -11,7 +26,7 @@
         width: 400px;
 
         @media screen and (max-width: $smAndBelow) {
-            width: 200px;
+            width: auto;
         }
     }
 
