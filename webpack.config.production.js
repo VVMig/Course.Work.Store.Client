@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'src', 'index.tsx'),
@@ -14,5 +15,14 @@ module.exports = {
             chunks: 'all',
         },
     },
-    devtool: 'source-map',
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'public', '_redirects'),
+                    to: path.resolve(__dirname, 'dist'),
+                },
+            ],
+        }),
+    ],
 };
