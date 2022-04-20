@@ -10,24 +10,6 @@ module.exports = {
         filename: '[name].[fullhash].js',
     },
     mode: 'development',
-    module: {
-        rules: [
-            {
-                test: /\.(css|scss|sass)$/,
-                use: [
-                    {
-                        loader: 'style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'sass-loader',
-                    },
-                ],
-            },
-        ],
-    },
     devtool: 'inline-source-map',
     devServer: {
         host: 'localhost',
