@@ -45,9 +45,7 @@ module.exports = (env) => ({
             publicPath: '/',
         }),
         new webpack.DefinePlugin({
-            BASE_URL: JSON.stringify(
-                env.BASE_URL || 'http://localhost:3000/api'
-            ),
+            BASE_URL: JSON.stringify(env.BASE_URL),
         }),
     ],
 });

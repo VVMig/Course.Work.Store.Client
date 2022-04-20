@@ -9,7 +9,7 @@ module.exports = function (env) {
 
     const envConfig = require(`./webpack.config.${env.env}.js`);
 
-    const mergedConfig = merge(common(env.BASE_URL), envConfig);
+    const mergedConfig = merge(common(env), envConfig);
 
     return mergedConfig;
 };
