@@ -1,4 +1,5 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import clsx from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -24,6 +25,11 @@ const columns: GridColDef[] = [
         headerName: 'Category',
         width: 80,
     },
+    {
+        field: 'transactionsAmount',
+        headerName: 'Transactions Amount',
+        width: 160,
+    },
 ];
 
 const mapProducts = (product: IProduct) => ({
@@ -32,6 +38,7 @@ const mapProducts = (product: IProduct) => ({
     price: product.price,
     amount: product.amount,
     category: product.category,
+    transactionsAmount: product.transactionsAmount,
 });
 
 export const Products = () => {
@@ -58,10 +65,12 @@ export const Products = () => {
 
             const { data } = await getAllProducts(page, getAccessToken());
 
+            console.log(data);
+
             if (hotUpdate) {
                 setProducts(data.products);
             } else {
-                setProducts(products.concat(data.products));
+                setProducts(products.concat(data.products ?? []));
             }
 
             if (!totalCounts || hotUpdate) {
@@ -110,6 +119,14 @@ export const Products = () => {
                 onSelectionModelChange={onSelectRow}
                 onPageChange={onChangePage}
                 autoPageSize={false}
+                getRowClassName={(params) => {
+                    console.log(params);
+
+                    return clsx({
+                        ['users-page__low-amount']: params.row.amount == 1,
+                        ['users-page__empty']: params.row.amount == 0,
+                    });
+                }}
             />
             {selectedIds.length === 1 && (
                 <EditProductDialog

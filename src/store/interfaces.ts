@@ -26,6 +26,7 @@ export interface IProduct {
     commonId?: string;
     briefInformation?: string;
     category: string;
+    transactionsAmount: number;
 }
 
 export interface INavigation {

@@ -61,6 +61,12 @@ export const getNewProducts = (limit: number) => {
     );
 };
 
+export const getPopularProducts = () => {
+    return axios.get<IProduct[]>(
+        `${getEndpointUrl(Endpoints.PRODUCT_POPULAR)}`
+    );
+};
+
 export const getAllProducts = (page: number, accessToken: string) => {
     return axios.get<{ products: IProduct[]; totalCounts: number }>(
         `${getEndpointUrl(Endpoints.PRODUCT_ALL)}?page=${page}`,

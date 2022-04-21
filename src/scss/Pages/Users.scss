@@ -13,4 +13,12 @@
         display: flex;
         gap: 10px;
     }
+
+    &__low-amount {
+        background-color: $orange;
+    }
+
+    &__empty {
+        background-color: $red;
+    }
 }

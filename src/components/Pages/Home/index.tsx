@@ -16,7 +16,10 @@ import { requestErrorMessage } from '../../../helpers/errorResponse';
 import { saveTokens } from '../../../helpers/tokensHelpers';
 import { useQuery } from '../../../hooks/useQueryParams';
 import { IAuthResponse } from '../../../services/interfaces';
-import { getNewProducts } from '../../../services/productApiService';
+import {
+    getNewProducts,
+    getPopularProducts,
+} from '../../../services/productApiService';
 import { User } from '../../../store';
 import { IProduct } from '../../../store/interfaces';
 import { ProductSection } from './ProductSection';
@@ -25,7 +28,9 @@ const newProductsRequestLimit = 4;
 
 interface IState {
     newProducts: IProduct[];
+    popularProducts: IProduct[];
     isNewProductsPending: boolean;
+    isPopularProductsPending: boolean;
 }
 
 interface IAction {
@@ -36,11 +41,15 @@ interface IAction {
 enum Actions {
     SET_NEW_PRODUCTS = 'SET_NEW_PRODUCTS',
     SET_NEW_PRODUCTS_PENDING = 'SET_NEW_PRODUCTS_PENDING',
+    SET_POPULAR_PRODUCTS = 'SET_POPULAR_PRODUCTS',
+    SET_POPULAR_PRODUCTS_PENDING = 'SET_POPULAR_PRODUCTS_PENDING',
 }
 
 const initialState: IState = {
     newProducts: [],
+    popularProducts: [],
     isNewProductsPending: false,
+    isPopularProductsPending: false,
 };
 
 const reducer = (state: IState, action: IAction): IState => {
@@ -54,6 +63,16 @@ const reducer = (state: IState, action: IAction): IState => {
             return {
                 ...state,
                 isNewProductsPending: action.payload,
+            };
+        case Actions.SET_POPULAR_PRODUCTS:
+            return {
+                ...state,
+                popularProducts: action.payload,
+            };
+        case Actions.SET_POPULAR_PRODUCTS_PENDING:
+            return {
+                ...state,
+                isPopularProductsPending: action.payload,
             };
         default:
             return state;
@@ -111,6 +130,29 @@ export const Home = () => {
         }
     };
 
+    const getPopularProductsRequest = async () => {
+        try {
+            dispatch({
+                type: Actions.SET_POPULAR_PRODUCTS_PENDING,
+                payload: true,
+            });
+
+            const { data } = await getPopularProducts();
+
+            dispatch({
+                type: Actions.SET_POPULAR_PRODUCTS,
+                payload: data,
+            });
+        } catch (error) {
+            toast.error(requestErrorMessage(error));
+        } finally {
+            dispatch({
+                type: Actions.SET_POPULAR_PRODUCTS_PENDING,
+                payload: false,
+            });
+        }
+    };
+
     useEffect(() => {
         if (credentials) {
             loginUserByCredentials();
@@ -119,6 +161,7 @@ export const Home = () => {
 
     useEffect(() => {
         getNewProductsRequest();
+        getPopularProductsRequest();
     }, []);
 
     return (
@@ -166,6 +209,12 @@ export const Home = () => {
                     products={state.newProducts}
                     updateProductsRequest={getNewProductsRequest}
                     title="Our new arrivals"
+                />
+                <ProductSection
+                    isLoading={state.isPopularProductsPending}
+                    products={state.popularProducts}
+                    updateProductsRequest={getPopularProductsRequest}
+                    title="Best sales"
                 />
             </div>
             <Helmet>

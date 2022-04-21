@@ -21,4 +21,5 @@ export enum Endpoints {
     PRODUCT_SEARCH = '/product/search',
     PRODUCT_NEW = '/product/new',
     PRODUCT_ALL = '/product/all',
+    PRODUCT_POPULAR = '/product/popular',
 }
