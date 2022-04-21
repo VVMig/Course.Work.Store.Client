@@ -34,6 +34,7 @@ export const Cart = observer(() => {
                                     category={product.category}
                                     briefInformation={product.briefInformation}
                                     isCart
+                                    product={product}
                                 />
                             ))}
                         </div>

@@ -8,6 +8,7 @@ import { Roles } from '../../../constants/Roles';
 import { URL } from '../../../constants/URL';
 import { useToggleCart } from '../../../hooks/useToggleCart';
 import { User } from '../../../store';
+import { IProduct } from '../../../store/interfaces';
 import { CartButton } from '../CartButton';
 import { AdminOptions } from './AdminOptions';
 
@@ -19,6 +20,7 @@ interface IProps {
     briefInformation: string;
     isCart?: boolean;
     imageSrc?: string;
+    product: IProduct;
     updateProductsList?: () => Promise<void>;
 }
 
@@ -32,6 +34,7 @@ export const ProductCard = observer(
         briefInformation,
         isCart,
         imageSrc,
+        product,
     }: IProps) => {
         const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(
             null
@@ -60,6 +63,15 @@ export const ProductCard = observer(
 
         return (
             <div className="product-card">
+                <AdminOptions
+                    anchorEl={anchorEl}
+                    handleClose={handleClose}
+                    open={!!anchorEl}
+                    id={id}
+                    productTitle={title}
+                    updateProductsList={updateProductsList}
+                    product={product}
+                />
                 <Link
                     to={`${URL.CATEGORY}${
                         URL.PRODUCT
@@ -74,14 +86,6 @@ export const ProductCard = observer(
                                 >
                                     <MoreVert />
                                 </IconButton>
-                                <AdminOptions
-                                    anchorEl={anchorEl}
-                                    handleClose={handleClose}
-                                    open={!!anchorEl}
-                                    id={id}
-                                    productTitle={title}
-                                    updateProductsList={updateProductsList}
-                                />
                             </>
                         )}
                         <div

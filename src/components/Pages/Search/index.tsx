@@ -61,6 +61,7 @@ export const SearchPage = () => {
                             id={product.id}
                             category={product.category}
                             briefInformation={product.briefInformation}
+                            product={product}
                         />
                     ))
                 ) : (

@@ -55,6 +55,7 @@ export const Category = observer(() => {
                             category={product.category}
                             updateProductsList={getProducts(categoryType)}
                             briefInformation={product.briefInformation}
+                            product={product}
                             imageSrc={
                                 product.images.find((image) => image.isMain)
                                     ?.url

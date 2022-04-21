@@ -34,6 +34,7 @@ export const ProductSection = ({
                             category={product.category}
                             updateProductsList={updateProductsRequest}
                             briefInformation={product.briefInformation}
+                            product={product}
                             imageSrc={
                                 product.images.find((image) => image.isMain)
                                     ?.url

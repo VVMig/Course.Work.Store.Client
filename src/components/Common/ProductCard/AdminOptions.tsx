@@ -1,17 +1,20 @@
 import { Menu, MenuItem } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import { requestErrorMessage } from '../../../helpers/errorResponse';
 import { getAccessToken } from '../../../helpers/tokensHelpers';
 import { removeProduct } from '../../../services/productApiService';
+import { IProduct } from '../../../store/interfaces';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog';
+import { EditProductDialog } from '../Dialogs/EditProductDialog';
 
 interface IProps {
     anchorEl?: Element | ((element: Element) => Element);
     open: boolean;
     productTitle: string;
     id: string;
+    product: IProduct;
     handleClose?: (event?: React.MouseEvent) => void;
     updateProductsList: () => Promise<void>;
 }
@@ -24,16 +27,25 @@ export const AdminOptions = observer(
         productTitle,
         id,
         updateProductsList,
+        product,
     }: IProps) => {
         const [isLoading, setIsLoading] = useState(false);
         const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+        const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
-        const toggleConfirmationDialog = (e?: React.MouseEvent) => {
+        const toggleConfirmationDialog = useCallback((e?: React.MouseEvent) => {
             e?.preventDefault();
 
             setIsConfirmDialogOpen((prev) => !prev);
             handleClose();
-        };
+        }, []);
+
+        const toggleEditDialog = useCallback((e?: React.MouseEvent) => {
+            e?.preventDefault();
+
+            setIsEditDialogOpen((prev) => !prev);
+            handleClose();
+        }, []);
 
         const onClickRemove = async () => {
             if (isLoading) {
@@ -74,6 +86,7 @@ export const AdminOptions = observer(
                         'aria-labelledby': 'basic-button',
                     }}
                 >
+                    <MenuItem onClick={toggleEditDialog}>Edit Product</MenuItem>
                     <MenuItem onClick={toggleConfirmationDialog}>
                         Remove Product
                     </MenuItem>
@@ -83,6 +96,12 @@ export const AdminOptions = observer(
                     isOpen={isConfirmDialogOpen}
                     handleClose={toggleConfirmationDialog}
                     title={`Remove ${productTitle}?`}
+                />
+                <EditProductDialog
+                    isOpen={isEditDialogOpen}
+                    handleClose={toggleEditDialog}
+                    product={product}
+                    updateProductsList={updateProductsList}
                 />
             </>
         );

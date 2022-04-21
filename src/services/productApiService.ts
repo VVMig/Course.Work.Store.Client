@@ -12,6 +12,17 @@ export const addProduct = (body: IAddProductBody, accessToken: string) => {
     });
 };
 
+export const editProduct = (
+    body: IAddProductBody & { id: string },
+    accessToken: string
+) => {
+    return axios.put(getEndpointUrl(Endpoints.PRODUCT_EDIT), body, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+};
+
 export const getProductsByCategory = (category: string) => {
     return axios.get<IProduct[]>(
         `${getEndpointUrl(Endpoints.PRODUCT_CATEGORY)}?category=${category}`
@@ -47,5 +58,16 @@ export const searchProducts = (text: string) => {
 export const getNewProducts = (limit: number) => {
     return axios.get<IProduct[]>(
         `${getEndpointUrl(Endpoints.PRODUCT_NEW)}?limit=${limit}`
+    );
+};
+
+export const getAllProducts = (page: number, accessToken: string) => {
+    return axios.get<{ products: IProduct[]; totalCounts: number }>(
+        `${getEndpointUrl(Endpoints.PRODUCT_ALL)}?page=${page}`,
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
     );
 };

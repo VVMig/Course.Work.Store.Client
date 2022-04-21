@@ -13,10 +13,12 @@ export enum Endpoints {
     USER_ROLE = '/user/role',
     USER_DELETE = '/user/delete',
     PRODUCT_ADD = '/product/add',
+    PRODUCT_EDIT = '/product/edit',
     PRODUCT_REMOVE = '/product/remove',
     PRODUCT_CATEGORIES = '/product/categories',
     PRODUCT_PRODUCT = '/product/product',
     PRODUCT_CATEGORY = '/product/category',
     PRODUCT_SEARCH = '/product/search',
     PRODUCT_NEW = '/product/new',
+    PRODUCT_ALL = '/product/all',
 }
