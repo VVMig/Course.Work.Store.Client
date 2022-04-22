@@ -24,7 +24,7 @@
     &__products {
         background-color: $white;
         margin: 20px 5px 5px;
-        padding: 5px 0;
+        padding: 10px 0 10px;
         border-radius: 15px;
         box-shadow: 0 0 5px rgba($black, 0.3);
 
@@ -33,32 +33,15 @@
             color: $black;
             text-transform: capitalize;
             font-weight: 100;
-            margin-bottom: 8px;
+            margin: 10px 0;
             text-align: center;
-
-            @media screen and (max-width: $xlAndBelow) {
-                padding-left: 5px;
-            }
         }
 
         &__list {
-            padding-top: 20px;
+            padding: 20px 0;
             display: grid;
             justify-items: center;
             row-gap: 15px;
-            grid-template-columns: repeat(4, 1fr);
-
-            @media screen and (max-width: $xlAndBelow) {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            @media screen and (max-width: $lgAndBelow) {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            @media screen and (max-width: $smAndBelow) {
-                grid-template-columns: repeat(1, 1fr);
-            }
         }
     }
 }

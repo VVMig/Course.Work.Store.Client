@@ -72,6 +72,7 @@ export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
             );
 
             toast.success('Product has been added');
+            setImages([]);
             handleClose();
         } catch (error) {
             toast.error(requestErrorMessage(error));
