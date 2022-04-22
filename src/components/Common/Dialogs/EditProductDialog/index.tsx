@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { requestErrorMessage } from '../../../../helpers/errorResponse';
@@ -53,6 +53,7 @@ export const EditProductDialog = observer(
         const [images, setImages] = useState<string[]>(
             product?.images.map((image) => image.url) ?? []
         );
+        const [mainImageIndex, setMainImageIndex] = useState(0);
 
         const initialValues = {
             title: product?.title,
@@ -66,10 +67,17 @@ export const EditProductDialog = observer(
             try {
                 setIsLoading(true);
 
+                const imagesCopy = images.slice();
+
+                [imagesCopy[0], imagesCopy[mainImageIndex]] = [
+                    images[mainImageIndex],
+                    images[0],
+                ];
+
                 await editProduct(
                     {
                         ...values,
-                        images,
+                        images: imagesCopy,
                         category,
                         id: product?.id ?? product._id,
                     },
@@ -117,8 +125,15 @@ export const EditProductDialog = observer(
 
             const renderedImages = await Promise.all(promisedImages);
 
-            setImages(renderedImages as string[]);
+            setImages((prev) => prev.concat(renderedImages as string[]));
         };
+
+        const onSelectMainImage = useCallback(
+            (index: number) => () => {
+                setMainImageIndex(index);
+            },
+            []
+        );
 
         return (
             <Dialog
@@ -182,6 +197,13 @@ export const EditProductDialog = observer(
                                                 key={`${imageIndex}-image`}
                                                 src={image}
                                                 onClickClose={onRemoveImage(
+                                                    imageIndex
+                                                )}
+                                                isMain={
+                                                    imageIndex ===
+                                                    mainImageIndex
+                                                }
+                                                onClick={onSelectMainImage(
                                                     imageIndex
                                                 )}
                                             />

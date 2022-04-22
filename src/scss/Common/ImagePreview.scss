@@ -16,6 +16,10 @@ $height: 80px;
         object-fit: cover;
     }
 
+    &_main {
+        border: 2px solid $orange;
+    }
+
     .MuiButtonBase-root {
         position: absolute;
         right: 0;

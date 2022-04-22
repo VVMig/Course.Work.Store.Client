@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { requestErrorMessage } from '../../../../helpers/errorResponse';
@@ -48,16 +48,24 @@ type FormValues = typeof initialValues;
 export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [category, setCategory] = useState('');
-    const [images, setImages] = useState<string[]>();
+    const [images, setImages] = useState<string[]>([]);
+    const [mainImageIndex, setMainImageIndex] = useState(0);
 
     const addProductRequest = async (values: FormValues) => {
         try {
             setIsLoading(true);
 
+            const imagesCopy = images.slice();
+
+            [imagesCopy[0], imagesCopy[mainImageIndex]] = [
+                images[mainImageIndex],
+                images[0],
+            ];
+
             await addProduct(
                 {
                     ...values,
-                    images,
+                    images: imagesCopy,
                     category,
                 },
                 getAccessToken()
@@ -101,8 +109,15 @@ export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
 
         const renderedImages = await Promise.all(promisedImages);
 
-        setImages(renderedImages as string[]);
+        setImages((prev) => prev.concat(renderedImages as string[]));
     };
+
+    const onSelectMainImage = useCallback(
+        (index: number) => () => {
+            setMainImageIndex(index);
+        },
+        []
+    );
 
     return (
         <Dialog
@@ -166,6 +181,12 @@ export const AddProductDialog = observer(({ isOpen, handleClose }: IProps) => {
                                             key={`${imageIndex}-image`}
                                             src={image}
                                             onClickClose={onRemoveImage(
+                                                imageIndex
+                                            )}
+                                            isMain={
+                                                imageIndex === mainImageIndex
+                                            }
+                                            onClick={onSelectMainImage(
                                                 imageIndex
                                             )}
                                         />

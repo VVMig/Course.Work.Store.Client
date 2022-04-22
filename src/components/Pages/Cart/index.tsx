@@ -35,6 +35,11 @@ export const Cart = observer(() => {
                                     briefInformation={product.briefInformation}
                                     isCart
                                     product={product}
+                                    imageSrc={
+                                        product.images.find(
+                                            (image) => image.isMain
+                                        )?.url
+                                    }
                                 />
                             ))}
                         </div>
