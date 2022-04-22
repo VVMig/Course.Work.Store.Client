@@ -62,6 +62,10 @@ export const SearchPage = () => {
                             category={product.category}
                             briefInformation={product.briefInformation}
                             product={product}
+                            imageSrc={
+                                product.images.find((image) => image.isMain)
+                                    ?.url
+                            }
                         />
                     ))
                 ) : (
