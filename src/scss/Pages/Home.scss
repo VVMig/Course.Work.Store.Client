@@ -14,16 +14,27 @@
                 height: 200px;
             }
         }
+
+        &__products-content {
+            display: flex;
+            justify-content: center;
+        }
     }
 
     &__products {
-        padding-top: 20px;
+        background-color: $white;
+        margin: 20px 5px 5px;
+        padding: 5px 0;
+        border-radius: 15px;
+        box-shadow: 0 0 5px rgba($black, 0.3);
 
         &__title {
-            font-size: 24px;
+            font-size: 32px;
             color: $black;
             text-transform: capitalize;
             font-weight: 100;
+            margin-bottom: 8px;
+            text-align: center;
 
             @media screen and (max-width: $xlAndBelow) {
                 padding-left: 5px;

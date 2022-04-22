@@ -21,7 +21,7 @@ interface IProps {
     isCart?: boolean;
     imageSrc?: string;
     product: IProduct;
-    updateProductsList?: () => Promise<void>;
+    updateProductsList?: () => Promise<void> | void;
 }
 
 export const ProductCard = observer(

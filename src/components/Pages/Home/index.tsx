@@ -24,7 +24,7 @@ import { User } from '../../../store';
 import { IProduct } from '../../../store/interfaces';
 import { ProductSection } from './ProductSection';
 
-const newProductsRequestLimit = 4;
+const newProductsRequestLimit = 8;
 
 interface IState {
     newProducts: IProduct[];
@@ -159,9 +159,13 @@ export const Home = () => {
         }
     }, [credentials]);
 
+    const updateProducts = useCallback(async () => {
+        await getNewProductsRequest();
+        await getPopularProductsRequest();
+    }, []);
+
     useEffect(() => {
-        getNewProductsRequest();
-        getPopularProductsRequest();
+        updateProducts();
     }, []);
 
     return (
@@ -207,13 +211,13 @@ export const Home = () => {
                 <ProductSection
                     isLoading={state.isNewProductsPending}
                     products={state.newProducts}
-                    updateProductsRequest={getNewProductsRequest}
+                    updateProductsRequest={updateProducts}
                     title="Our new arrivals"
                 />
                 <ProductSection
                     isLoading={state.isPopularProductsPending}
                     products={state.popularProducts}
-                    updateProductsRequest={getPopularProductsRequest}
+                    updateProductsRequest={updateProducts}
                     title="Best sales"
                 />
             </div>

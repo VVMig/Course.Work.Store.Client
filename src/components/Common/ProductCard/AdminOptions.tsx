@@ -16,7 +16,7 @@ interface IProps {
     id: string;
     product: IProduct;
     handleClose?: (event?: React.MouseEvent) => void;
-    updateProductsList: () => Promise<void>;
+    updateProductsList: () => Promise<void> | void;
 }
 
 export const AdminOptions = observer(
