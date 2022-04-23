@@ -1,4 +1,5 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -36,7 +37,7 @@ const mapUsers = (user: IUser) => ({
     lastName: user.lastName,
     email: user.email,
     role: user.role,
-    lastLogin: new Date(user.lastLogin).toDateString(),
+    lastLogin: moment(user.lastLogin).format('DD.MM.YYYY HH:mm:ss'),
 });
 
 export const Users = () => {
