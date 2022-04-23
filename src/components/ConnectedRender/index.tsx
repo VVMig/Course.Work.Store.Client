@@ -4,8 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { URL } from '../../constants/URL';
 import { requestErrorMessage } from '../../helpers/errorResponse';
-import { getAccessToken, removeTokens } from '../../helpers/tokensHelpers';
-import { auth } from '../../services/authApiService';
+import {
+    getAccessToken,
+    getRefreshToken,
+    removeTokens,
+    saveTokens,
+} from '../../helpers/tokensHelpers';
+import { auth, refreshToken } from '../../services/authApiService';
 import { User } from '../../store';
 import { AuthRoute } from '../Common/AuthRoute';
 import { GlobalDialogs } from '../Common/Dialogs';
@@ -40,6 +45,20 @@ export const ConnectedRender = observer(() => {
 
             User.loginUser(data);
         } catch (error) {
+            if (error.response.status === 401) {
+                try {
+                    const { data } = await refreshToken(getRefreshToken());
+
+                    saveTokens(data.accessToken, data.refreshToken);
+                    User.loginUser(data.user);
+                } catch (error) {
+                    toast.error(requestErrorMessage(error));
+
+                    removeTokens();
+                }
+
+                return;
+            }
             toast.error(requestErrorMessage(error));
 
             removeTokens();

@@ -35,3 +35,12 @@ export const auth = async (accessToken: string) => {
         },
     });
 };
+
+export const refreshToken = (refreshToken: string) => {
+    return axios.post<IAuthResponse>(
+        getEndpointUrl(Endpoints.USER_REFRESH_TOKEN),
+        {
+            refreshToken,
+        }
+    );
+};
