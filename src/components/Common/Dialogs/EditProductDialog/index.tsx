@@ -163,6 +163,8 @@ export const EditProductDialog = observer(
                                     placeholder="Description"
                                     variant="outlined"
                                     label="Description"
+                                    multiline
+                                    minRows={5}
                                 />
                                 <CustomInput
                                     name="briefInformation"

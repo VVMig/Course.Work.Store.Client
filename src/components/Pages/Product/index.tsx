@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import ReactMarkdown from 'react-markdown';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Pagination } from 'swiper';
@@ -89,9 +90,11 @@ export const Product = observer(() => {
                     </div>
 
                     <div className="product-page__info">
-                        <h3 className="product-page__description">
-                            {product?.description}
-                        </h3>
+                        <div className="product-page__description">
+                            <ReactMarkdown>
+                                {product?.description}
+                            </ReactMarkdown>
+                        </div>
                     </div>
 
                     <div className="product-page__actions">
