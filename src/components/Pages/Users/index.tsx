@@ -10,7 +10,7 @@ import { IUser } from '../../../store/interfaces';
 import { Actions } from './Actions';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 210 },
+    { field: 'id', headerName: 'ID', width: 230 },
     { field: 'firstName', headerName: 'First name', width: 130 },
     { field: 'lastName', headerName: 'Last name', width: 130 },
     {
@@ -23,6 +23,11 @@ const columns: GridColDef[] = [
         headerName: 'Role',
         width: 160,
     },
+    {
+        field: 'lastLogin',
+        headerName: 'Last login',
+        width: 160,
+    },
 ];
 
 const mapUsers = (user: IUser) => ({
@@ -31,6 +36,7 @@ const mapUsers = (user: IUser) => ({
     lastName: user.lastName,
     email: user.email,
     role: user.role,
+    lastLogin: new Date(user.lastLogin).toDateString(),
 });
 
 export const Users = () => {

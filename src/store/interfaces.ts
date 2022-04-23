@@ -8,6 +8,7 @@ export interface IUser {
     lastName?: string;
     role?: Roles;
     cart: IProduct[];
+    lastLogin?: Date;
 }
 
 export interface IProductImage {
