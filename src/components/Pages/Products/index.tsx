@@ -65,8 +65,6 @@ export const Products = () => {
 
             const { data } = await getAllProducts(page, getAccessToken());
 
-            console.log(data);
-
             if (hotUpdate) {
                 setProducts(data.products);
             } else {
@@ -120,8 +118,6 @@ export const Products = () => {
                 onPageChange={onChangePage}
                 autoPageSize={false}
                 getRowClassName={(params) => {
-                    console.log(params);
-
                     return clsx({
                         ['users-page__low-amount']: params.row.amount == 1,
                         ['users-page__empty']: params.row.amount == 0,
