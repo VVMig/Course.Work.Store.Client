@@ -113,6 +113,10 @@ export const Home = () => {
                 type: Actions.SET_NEW_PRODUCTS_PENDING,
                 payload: true,
             });
+            dispatch({
+                type: Actions.SET_POPULAR_PRODUCTS_PENDING,
+                payload: true,
+            });
 
             const { data } = await getNewProducts(newProductsRequestLimit);
 
