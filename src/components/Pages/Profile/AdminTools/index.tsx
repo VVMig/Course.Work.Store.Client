@@ -1,4 +1,9 @@
-import { AddCircleOutline, Dashboard, Group } from '@mui/icons-material';
+import {
+    AddCircleOutline,
+    BarChart,
+    Dashboard,
+    Group,
+} from '@mui/icons-material';
 import { Card, CardContent } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
@@ -39,6 +44,15 @@ export const AdminTools = observer(() => {
                         <h3>Users Dashboard</h3>
                         <CardContent>
                             <Group fontSize="large" />
+                        </CardContent>
+                    </Card>
+                    <Card
+                        className="admin-tools__add-product"
+                        onClick={() => navigate(URL.STATS)}
+                    >
+                        <h3>Statistics</h3>
+                        <CardContent>
+                            <BarChart fontSize="large" />
                         </CardContent>
                     </Card>
                 </div>

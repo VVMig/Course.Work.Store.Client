@@ -66,7 +66,7 @@ export const Category = observer(() => {
             </div>
             <Helmet>
                 <title>
-                    {Title.HOME}-{categoryType}
+                    {Title.HOME} | {categoryType}
                 </title>
             </Helmet>
         </>

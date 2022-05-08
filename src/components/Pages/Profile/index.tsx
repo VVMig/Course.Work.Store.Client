@@ -30,7 +30,7 @@ export const Profile = observer(() => {
             </Card>
             {isAdmin && <AdminTools />}
             <Helmet>
-                <title>{Title.PROFILE}</title>
+                <title>VVMig | {Title.PROFILE}</title>
             </Helmet>
         </>
     );

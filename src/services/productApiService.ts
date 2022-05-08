@@ -67,9 +67,11 @@ export const getPopularProducts = () => {
     );
 };
 
-export const getAllProducts = (page: number, accessToken: string) => {
+export const getAllProducts = (page: number | null, accessToken: string) => {
     return axios.get<{ products: IProduct[]; totalCounts: number }>(
-        `${getEndpointUrl(Endpoints.PRODUCT_ALL)}?page=${page}`,
+        `${getEndpointUrl(Endpoints.PRODUCT_ALL)}${
+            page ? `?page=${page}` : ''
+        }`,
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,

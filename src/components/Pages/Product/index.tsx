@@ -117,7 +117,7 @@ export const Product = observer(() => {
             </div>
             <Helmet>
                 <title>
-                    {Title.HOME}-{product?.title ?? ''}
+                    {Title.HOME} | {product?.title ?? ''}
                 </title>
             </Helmet>
         </>

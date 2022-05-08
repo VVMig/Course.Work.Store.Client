@@ -45,9 +45,14 @@ export const purchase = (body: IPurchaseBody, accessToken: string) => {
     );
 };
 
-export const getUsersList = (pageNumber: number, accessToken: string) => {
+export const getUsersList = (
+    pageNumber: number | null,
+    accessToken: string
+) => {
     return axios.get<{ users: IUser[]; totalCounts: number }>(
-        `${getEndpointUrl(Endpoints.USER_USERS)}?page=${pageNumber}`,
+        `${getEndpointUrl(Endpoints.USER_USERS)}${
+            pageNumber ? `?page=${pageNumber}` : ''
+        }`,
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,

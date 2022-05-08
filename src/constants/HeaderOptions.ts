@@ -1,5 +1,5 @@
 export enum Title {
-    CART = 'VVMig-Cart',
+    CART = 'Cart',
     HOME = 'VVMig',
     PROFILE = 'Profile',
     NOT_FOUND = '404 Not Found',

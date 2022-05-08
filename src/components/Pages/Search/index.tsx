@@ -77,7 +77,7 @@ export const SearchPage = () => {
             </div>
             <Helmet>
                 <title>
-                    {Title.SEARCH}-{searchText}
+                    VVMig | {Title.SEARCH}-{searchText}
                 </title>
             </Helmet>
         </>

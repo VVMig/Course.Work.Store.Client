@@ -10,4 +10,5 @@ export enum URL {
     SEARCH = '/search',
     USERS = '/admin/users',
     PRODUCTS = '/admin/products',
+    STATS = '/stats',
 }

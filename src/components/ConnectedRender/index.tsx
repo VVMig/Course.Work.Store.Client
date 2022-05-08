@@ -25,6 +25,7 @@ import { Products } from '../Pages/Products';
 import { Profile } from '../Pages/Profile';
 import { Purchase } from '../Pages/Purchase';
 import { SearchPage } from '../Pages/Search';
+import { Stats } from '../Pages/Stats';
 import { Users } from '../Pages/Users';
 import { VerificationSuccess } from '../Pages/VerificationSuccess';
 
@@ -113,6 +114,7 @@ export const ConnectedRender = observer(() => {
                     <Route path={URL.SEARCH} element={<SearchPage />} />
                     <Route path={URL.USERS} element={<Users />} />
                     <Route path={URL.PRODUCTS} element={<Products />} />
+                    <Route path={URL.STATS} element={<Stats />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>

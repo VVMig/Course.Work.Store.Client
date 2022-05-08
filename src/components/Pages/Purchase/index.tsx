@@ -224,7 +224,7 @@ export const Purchase = observer(() => {
                 </div>
             </div>
             <Helmet>
-                <title>{Title.PURCHASE}</title>
+                <title>VVMig | {Title.PURCHASE}</title>
             </Helmet>
         </>
     );
