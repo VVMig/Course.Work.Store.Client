@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, LinearProgress } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
@@ -140,70 +140,89 @@ export const Stats = observer(() => {
 
     return (
         <div className="stats">
-            <h2 className="stats__title">Statistics</h2>
-            <TotalStats
-                totalEarns={countEarnings(products)}
-                totalProducts={products.length}
-                totalTransactions={countTransactionsAmount(products)}
-                usersAmount={usersAmount}
-            />
-            <div className="stats__chart-container">
-                <Card className="stats__chart-products">
-                    <CardContent>
-                        <h3 className="stats__chart__title">
-                            Products transactions
-                        </h3>
-                        <div className="stats__chart">
-                            <ResponsiveContainer width="100%" height={250}>
-                                <BarChart data={productsStats}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <YAxis />
-                                    <Tooltip content={<CustomTooltip />} />
-                                    <Bar
-                                        dataKey="Transactions"
-                                        fill="#8884d8"
-                                    />
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                        <h3 className="stats__chart__title">
-                            Transactions amount per Category
-                        </h3>
-                        <div className="stats__chart">
-                            <ResponsiveContainer width="100%" height={250}>
-                                <PieChart data={categoryStats}>
-                                    <Pie
-                                        data={categoryStats}
-                                        dataKey="Transactions"
-                                        nameKey="name"
-                                        cx="50%"
-                                        cy="50%"
-                                        outerRadius={80}
-                                        fill="#82ca9d"
-                                        label={renderCustomizedLabel}
-                                        fillRule="evenodd"
-                                        labelLine={false}
-                                        legendType="circle"
+            {isLoading ? (
+                <LinearProgress />
+            ) : (
+                <>
+                    <h2 className="stats__title">Statistics</h2>
+                    <TotalStats
+                        totalEarns={countEarnings(products)}
+                        totalProducts={products.length}
+                        totalTransactions={countTransactionsAmount(products)}
+                        usersAmount={usersAmount}
+                    />
+                    <div className="stats__chart-container">
+                        <Card className="stats__chart-products">
+                            <CardContent>
+                                <h3 className="stats__chart__title">
+                                    Products transactions
+                                </h3>
+                                <div className="stats__chart">
+                                    <ResponsiveContainer
+                                        width="100%"
+                                        height={250}
                                     >
-                                        {categoryStats.map((entry, index) => (
-                                            <Cell
-                                                fill={COLORS[index]}
-                                                key={index}
+                                        <BarChart data={productsStats}>
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <YAxis />
+                                            <Tooltip
+                                                content={<CustomTooltip />}
                                             />
-                                        ))}
-                                    </Pie>
-                                    <Legend />
-                                    <Tooltip content={<CustomTooltip />} />
-                                </PieChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
+                                            <Bar
+                                                dataKey="Transactions"
+                                                fill="#8884d8"
+                                            />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardContent>
+                                <h3 className="stats__chart__title">
+                                    Transactions amount per Category
+                                </h3>
+                                <div className="stats__chart">
+                                    <ResponsiveContainer
+                                        width="100%"
+                                        height={250}
+                                    >
+                                        <PieChart data={categoryStats}>
+                                            <Pie
+                                                data={categoryStats}
+                                                dataKey="Transactions"
+                                                nameKey="name"
+                                                cx="50%"
+                                                cy="50%"
+                                                outerRadius={80}
+                                                fill="#82ca9d"
+                                                label={renderCustomizedLabel}
+                                                fillRule="evenodd"
+                                                labelLine={false}
+                                                legendType="circle"
+                                            >
+                                                {categoryStats.map(
+                                                    (entry, index) => (
+                                                        <Cell
+                                                            fill={COLORS[index]}
+                                                            key={index}
+                                                        />
+                                                    )
+                                                )}
+                                            </Pie>
+                                            <Legend />
+                                            <Tooltip
+                                                content={<CustomTooltip />}
+                                            />
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </>
+            )}
+
             <Helmet>
                 <title>VVMig | Statistics</title>
             </Helmet>
